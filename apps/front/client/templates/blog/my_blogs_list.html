@@ -1,50 +1,75 @@
 <template name="myBlogsList">
-  <article class="page">
-    <h2>{{_ 'title_my_blogs'}}</h2>
+  <!-- <h2>{{_ 'title_my_blogs'}}</h2> -->
+  <div class="sub-bar clearfix">
+    <div class="container">
+      <div class="pull-left">
+        <span class = "counts blog-counts">
+          Total Blogs: {{getPublishedCount 'blogsCount'}}
+        </span>
+      </div>
+      <div class="pull-right">
+      </div>
+    </div> <!-- End Container -->
+  </div> <!-- End Sub-bar -->
 
-      {{#if noBlogs}}
-        {{_ 'text_no_blogs'}}
-      {{else}}
-        <div class="row-fluid">
-          <div class="btn-toolbar" role="toolbar">
-            <div class="btn-group" role="group">
-              <a class="btn btn-default">Total Blogs: {{getPublishedCount 'blogsCount'}}</a>
-            </div>
-            <div class="btn-group" role="group">
-              <a class="btn btn-primary" href="{{pathFor 'blogNew'}}">{{_ 'command_new'}}</a>
-            </div>
+  {{#if noBlogs}}
+    {{_ 'text_no_blogs'}} <!-- When no blog posts -->
+  {{else}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <div class="row-fluid">
+            {{#each blogs}}
+              {{> myBlogsListItem}}
+            {{/each}}
+          </div> <!-- End blogs items -->
+          <div class="row-fluid">
+            {{#if hasMore}}
+              <a class="btn btn-default btn-block load-more">Load More</a>
+            {{else}}
+              {{#unless ready}}
+                {{> listLoading}}
+              {{/unless}}
+            {{/if}}
           </div>
         </div>
+        <div class="col-md-3">
+          <!-- Space for Right -->
+        </div>
+      </div>
+    </div>
+  {{/if}}
 
-        <div class="row-fluid">
-          {{#each blogs}}
-            {{> myBlogsListItem}}
-          {{/each}}
-        </div>
-        <div class="row-fluid">
-          {{#if hasMore}}
-            <a class="btn btn-default btn-block load-more">Load More</a>
-          {{else}}
-            {{#unless ready}}
-              {{> listLoading}}
-            {{/unless}}
-          {{/if}}
-        </div>
-      {{/if}}
-  </article>
 </template>
 
 <template name="myBlogsListItem">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4>
-        <a href="{{pathFor 'blogOne'}}">{{title}} <small>{{userDisplayName user}} {{momentFromNow createdAt}}</small></a>
-      </h4>
-    </div>
-    <div class="panel-body">
-      <div class="line-clamp-2">
-        {{blog_content}}
+  <div class="blog-item">
+    <div class="blog-meta clearfix">
+
+      <div class="pull-left">
+        <div class ="blog-avatar">
+          <img src="{{getAvatarAuthor}}">
+        </div>
+        <div class="blog-meta-info">
+          <a href="" class="author">
+            {{userDisplayName user}}
+          </a>
+          <span class="date">
+            {{momentFromNow createdAt}}
+          </span>
+        </div>
+      </div>
+
+      <div class="pull-right">
+        <!-- Space for Right side meta -->
       </div>
     </div>
-  </div>
+    <h3>
+      <a href="{{pathFor 'blogOne'}}">{{title}}
+      </a>
+    </h3>
+    <div class="line-clamp-2">
+      {{blog_content}}
+    </div>
+  </div> <!-- End Blog Item -->
 </template>

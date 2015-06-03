@@ -13,10 +13,10 @@
     </button>
   </div> -->
 
-  <div role="navigation" class="navbar navbar-default navbar-static-top">
+  <div class="navbar-custom clearfix">
     <div class="container-fluid">
       <a class="navbar-brand" href="{{pathFor 'home'}}">{{_ 'brand'}}</a>
-      <ul class="nav navbar-nav pull-left">
+      <ul class="pull-left nav-lists">
         <li>
           <a href="#" data-toggle="aside-left">
             <i class="fa fa-bars"></i>
@@ -24,18 +24,40 @@
         </li>
       </ul>
 
-      <ul class="nav navbar-nav pull-right">
+      <ul class="pull-right nav-lists">
         <li>
           <a href="#" data-toggle="notifications">
             <i class="fa fa-bell"></i>
             {{#if notificationsCount}}<span class="badge">{{notificationsCount}}</span>{{/if}}
           </a>
         </li>
+        {{#if currentUser}}
+        <li class="dropdown">
+          <a href="" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <div class="avatar-header">
+              <img src="{{getAvatarUrl}}">
+            </div>
+            <i class="fa fa-chevron-down"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right ">
+            <li><a href="">1</a></li>
+            <li><a href="">2</a></li>
+            <li><a href="">3</a></li>
+          </ul>
+        </li>
+        {{else}}
+          <li>
+            <a href="#" data-action="signIn">
+              <i class="fa fa-cog"></i>
+              {{_ 'command_sign_in'}}
+            </a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>
 
   <!-- Pull Up 'margin-bottom:15px from nav' + 'padding 5px in main elements'  -->
-  <div style="margin-bottom: -20px;"></div>
+  <!-- <div style="margin-bottom: -20px;"></div> -->
 
 </template>

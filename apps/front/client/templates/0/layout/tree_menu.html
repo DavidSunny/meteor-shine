@@ -1,41 +1,61 @@
 <template name="treeMenu">
-  <ul class="nav nav-pills nav-stacked">
-
+  <ul class="aside-tree">
     <!-- Home -->
-    <li role="presentation" class="{{activeRoute 'home'}}">
+    <li class="{{activeRoute 'home'}}">
       <a href="{{pathFor 'home'}}">
-        <i class="fa fa-lg fa-home"></i> {{_ 'title_home'}}
+        <!-- <i class="fa fa-lg fa-home"></i> {{_ 'title_home'}} -->
+        <i class="icon-home-1"></i>
+        Home
       </a>
     </li>
 
     <!-- Blogs -->
-    <li role="presentation" class="{{activeRoute 'blogsList'}}">
+    <li class="{{activeRoute 'blogsList'}}">
       <a href="{{pathFor 'blogsList'}}">
-        <i class="fa fa-lg fa-list"></i> {{_ 'title_blogs'}}
+        <!-- <i class="fa fa-lg fa-list"></i> {{_ 'title_blogs'}} -->
+        <i class="icon-file-text"></i>
+        Blogs
       </a>
     </li>
 
     {{#if currentUser}}
     <!-- My Blogs -->
-    <li role="presentation" class="{{activeRoute 'myBlogsList'}}">
+    <li class="{{activeRoute 'myBlogsList'}}">
       <a href="{{pathFor 'myBlogsList'}}">
-        <i class="fa fa-lg fa-list"></i> {{_ 'title_my_blogs'}}
+        <!-- <i class="fa fa-lg fa-list"></i> {{_ 'title_my_blogs'}} -->
+        <i class="icon-file-text"></i>
+        My Blogs
       </a>
     </li>
 
     <!-- New Blog -->
-    <li role="presentation" class="{{activeRoute 'blogNew'}}">
+    <li class="{{activeRoute 'blogNew'}}">
       <a href="{{pathFor 'blogNew'}}">
-        <i class="fa fa-lg fa-pencil"></i> {{_ 'title_blog_new'}}
+        <!-- <i class="fa fa-lg fa-pencil"></i> {{_ 'title_blog_new'}} -->
+        <i class="icon-file-add"></i>
+        New Blog
       </a>
     </li>
     {{/if}}
 
     <!-- Preferences -->
-    <li role="presentation" class="{{activeRoute 'preference'}}">
+    <li class="{{activeRoute 'preference'}}">
       <a href="{{pathFor 'preference'}}">
-        <i class="fa fa-lg fa-gear"></i> {{_ 'title_preference'}}
+        <!-- <i class="fa fa-lg fa-gear"></i> {{_ 'title_preference'}} -->
+        <i class="icon-settings-streamline-1"></i>
+        Preferences
       </a>
     </li>
+
+    {{#if currentUser}}
+    <!-- Sign-Out -->
+    <li>
+      <a href="" data-action="signOut">
+        <!-- <i class="fa fa-lg fa-gear"></i> {{_ 'title_preference'}} -->
+        <i class="icon share"></i>
+        Sign Out
+      </a>
+    </li>
+    {{/if}}
   </ul>
 </template>

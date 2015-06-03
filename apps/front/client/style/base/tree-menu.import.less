@@ -1,67 +1,70 @@
+/**
+ *    Sidebar Tree (Menu List/Items)
+ */
 
-@tree-menu-text:          #aaa;
-
-.tree-menu-wrapper {
-
-}
-
-.tree-menu {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
+.aside-profile {
+  padding: 40px 0 0 0;
   a {
-    // color: rgba(0,0,0, 0.8);
-    text-decoration: none;
-  }
-
-  li {
-    color: @tree-menu-text;
-
-    span {
-      font-size: 14px;
-    }
-  }
-
-  li:hover {
-    //background: #393939;
+    color: @light-font-base;
+    font-size: 1.5em;
   }
 }
 
-.tree-menu > li {
-  background: @tree-menu-bg;
+ul.aside-tree {
+  .strip-list;
+  padding: 0 15px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
-.tree-menu > li + li {
-  margin-top: 5px;
-}
-
-.tree-menu .active {
-  //background: #555;
-  color: #ee9;
-}
-
-.tree-menu > li > .menu-item {
-  padding: 10px;
-  display: block;
-  cursor: pointer;
-}
-.tree-menu .sub-menu {
-  margin: 0;
-  padding: 0;
-  border-top: solid 1px #666;
-  //background: #444; //lighten(@nav-main-bg, 20%);
-  color: #999;
-  overflow: hidden;
-  list-style: none;
-
-  li {
-    padding: 4px 10px;
-    border-bottom: solid 1px #666;
-    cursor: pointer;
+ul.aside-tree li {
+  &:first-child {
+    margin-top: 0;
   }
-  li + li {
-//    border-bottom: solid 1px #666;
-  }
+  position: relative;
+  margin: 15px 0;
+}
 
+ul.aside-tree li a {
+  color: @gray-light;
+  text-decoration: none;
+  .upper-small;
+  i {
+    vertical-align: middle;
+  }
+}
+
+/**
+ *    Sidebar Animations
+ */
+
+// Sidebar animation
+#wrapper.aside-left-set .aside-left ul.aside-tree li  {
+  // Position after show
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+ul.aside-tree > li {
+  // Position before show
+  -webkit-transform: translateX(-@aside-left-width);
+          transform: translateX(-@aside-left-width);
+  &:nth-child(1){
+    transition: 0.4s ease-in-out all;
+  }
+  &:nth-child(2){
+    transition: 0.45s ease-in-out all;
+  }
+  &:nth-child(3){
+    transition: 0.5s ease-in-out all;
+  }
+  &:nth-child(4){
+    transition: 0.55s ease-in-out all;
+  }
+  &:nth-child(5){
+    transition: 0.6s ease-in-out all;
+  }
+  &:nth-child(6){
+    transition: 0.65s ease-in-out all;
+  }
 }

@@ -62,6 +62,5 @@ Template.layout.onRendered( function () {
     //   wrapper.removeClass('mobile');
     // };
   });
-
 });
 

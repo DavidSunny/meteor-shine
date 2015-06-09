@@ -15,84 +15,124 @@
     white-space:nowrap;
 }
 
-// .editor-wrapper {
-// 	display: block;
-// 	background: white;
-// 	border: 1px solid #CCCCCC;
-// 	border-radius: 5px;
-// 	overflow: hidden;
-// }
+#newTitle {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  &:focus {
+    outline: 0;
+    border: 0;
+    box-shadow: 0;
+  }
+}
 
-// #editor {
-// 	padding: 15px;
-// 	min-height: 200px;
-// 	// &:focus {
-// 	// 	outline: 0;
-// 	// 	box-shadow: 0;
-// 	// }
-// }
+p.shine-p {
+  display: block;
+  font-size: 20px;
+  line-height: 1.4;
+}
 
-// #editor.focus {
-// 	border: 3px @brand-success solid;
-// }
-
-// .editor-toolbar {
-// 	//display: none;
-// 	margin: 0 0 15px 0;
-// 	border-top-right-radius: 5px;
-// 	border-top-left-radius: 5px;
-// 	width: 100%;
-// 	height: auto;
-// 	background: black;
-// }
-
-// .editor-toolbar > ul {
-// 	padding:0;
-// 	margin: 0;
-// 	list-style: none;
-// }
+//========================================
+//    Editor Toolbars
+//========================================
+.editor-toolbar {
+  position: absolute;
+  opacity: 0;
+  z-index: 9999;
+  //width: 100px;
+  //margin-left: -50px;
+  -webkit-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
 
 
-// .editor-toolbar > ul li {
-// 	display: inline-block;
-// }
+  // Inactive State
+  opacity: 0;
+  margin-top: 0px;
 
-// .editor-toolbar > ul li button,
-// .editor-toolbar > ul li #editor-image {
-// 	display: inline-block;
-// 	padding: 10px;
-// 	background: black;
-// 	color: white;
-// 	outline: 0;
-// 	border: 0;
-// 	//border-radius: 5px;
-// }
+  -webkit-transition: opacity 250ms, margin 250ms;
+  -moz-transition: opacity 250ms, margin 250ms;
+  -ms-transition: opacity 250ms, margin 250ms;
+  -o-transition: opacity 250ms, margin 250ms;
+  transition: opacity 250ms, margin 250ms;
+}
+.editor-toolbar.active {
+  //display: block;
+  opacity: 1;
+  margin-top: -30px;
+}
+.editor-toolbar.inactive {
+  opacity: 0;
+  margin-top: 0px;
+}
 
-// #editor-image {
-// 	position: relative;
-// 	overflow: hidden;
-// 	input {
-// 		position: absolute;
-// 		top: 0;
-// 		right: 0;
-// 		margin: 0;
-// 		padding: 0;
-// 		font-size: 20px;
-// 		cursor: pointer;
-// 		opacity: 0;
-// 		filter: alpha(opacity=0);
-// 	}
-// }
+.editor-toolbar ul {
+  padding: 0px;
+  margin: 0px;
+  font-size: 0px; //Fix inline block white gap.
+  list-style: none;
+}
 
-// button.editor-button-active {
-// 	//background: lighten(black, 30%) !important;
-// 	color: @brand-success !important;
-// }
+.editor-toolbar ul:before {
+  position: absolute;
+  //top: 100px;
+  //left: 100px;
+  bottom: -5px;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, 0, 0);
+  transform: translate3d(-50%, 0, 0);
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
 
-// .editor-align-center {
-// 	text-align: center;
-// }
+.editor-toolbar ul > li {
+  @toolbar-radius: 2px;
+  @toolbar-size: 30px;
+  cursor: pointer;
+  display: inline-block;
+  background: black;
+  height: @toolbar-size;
+  width: @toolbar-size;
+  //line-height: @toolbar-size;
+  text-align: center;
+  margin: 0px;
+  font-size: 18px;
+  padding: 2.5px;
+  // &:hover {
+  //  background: lighten(black, 15%);
+  // }
+  &:first-child {
+    border-top-left-radius: @toolbar-radius;
+    border-bottom-left-radius: @toolbar-radius;
+  }
+  &:last-child {
+    border-top-right-radius: @toolbar-radius;
+    border-bottom-right-radius: @toolbar-radius;
+  }
+}
 
-// figure.image.is-mediaFocused {
-// 	border: 2px solid @brand-success;
-// }
+.editor-toolbar ul > li > a {
+  color: white;
+  display: block;
+  margin: 0px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  &:hover {
+    background: lighten(black, 20%);
+  }
+}
+
+.editor-toolbar button {
+  outline: 0;
+  border: 0;
+  padding: 0 10px;
+  box-shadow: 0;
+  color: white;
+  background: rgba(0,0,0,0.5);
+  font-weight: bold;
+  //text-align: center;
+}

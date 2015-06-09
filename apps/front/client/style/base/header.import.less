@@ -53,20 +53,35 @@ a.navbar-brand {
 
 .avatar-header {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: @avatar-header;
+  height: @avatar-header;
   overflow: hidden;
   vertical-align: middle;
   border-radius: 50%;
   background: @gray;
   img {
+    display: block;
     height: 100%;
     margin-left: 50%;
-    margin-top: 50%;
-    .translate(-50%, -50%);
+    margin-top: 0;
+    .translate(-50%);
   }
 }
 
 .navbar-custom ul.dropdown-menu {
   margin-top: -10px;
+  li a {
+    &:hover {
+      background: none;
+      color: black;
+    }
+  }
+  .dropdown-small a {
+    font-size: 0.9em;
+    color: @gray-light;
+    &:hover {
+      background: none;
+      color: @gray;
+    }
+  }
 }

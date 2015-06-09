@@ -2,7 +2,7 @@
 stripTags = function (el) {
   var lines = el.children();
 
-  lines.removeClass('editor-empty');
+  lines.removeClass('shine-empty');
   lines.removeClass('is-selected');
 
   return lines;
@@ -38,7 +38,7 @@ Template.blogNew.destroyed = function() {
 Template.blogNew.helpers({
   editable: function() {
     // +Added id="editor"
-    return '<div class="editable" contenteditable="true" name="content" id="editor" data-default="true"><p class="is-selected">본문</p></div>';
+    return '<div class="editable" contenteditable="true" name="content" id="editor" data-default="true"><p class="shine-p is-selected">본문</p></div>';
   },
   title: function() {
     return '<h2 class="newTitle" id="newTitle" name="title" contenteditable="true" data-default="true">제목</h2>';
@@ -108,8 +108,11 @@ Template.blogNew.onRendered( function (){
   // Define Title Element
   var editorTitle = document.getElementById('newTitle');
 
+  // Define Editor Toolbar Element
+  var editorToolbar = document.getElementById('editor-toolbar');
+
   // Initiate Editor
-  inlineEditor.init(editor, editorTitle);
+  inlineEditor.init(editor, editorTitle, editorToolbar);
 
   // Draft Auto-Save (First Time)
   this.autorun( function () {

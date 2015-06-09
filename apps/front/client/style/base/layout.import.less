@@ -10,20 +10,31 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100%;
-  height: 100vh !important;
+  //height: 100vh !important;
   background: @light-lightest;
 }
 
 #canvas {
-  position: relative;
-  background: @light-lightest;
-  width: 100vw;
-  min-height: 100%;
   -webkit-transition: 0.3s ease all;
           transition: 0.3s ease all;
   -webkit-transform: translateX(0);
           transform: translateX(0);
 }
+
+// #canvas {
+//   position: relative;
+//   background: @light-lightest;
+//   //height: 100%;
+//   -webkit-transition: 0.3s ease all;
+//           transition: 0.3s ease all;
+//   -webkit-transform: translateX(0);
+//           transform: translateX(0);
+// }
+
+// #inner-wrapper {
+//   min-height: 100vh;
+//   height: 100%;
+// }
 
 .btn-toolbar .btn-group {
   padding: 5px 0;
@@ -33,12 +44,7 @@ body {
   }
 }
 
-#inner-wrapper {
-  min-height: 100vh;
-  height: 100%;
 
-
-}
 
 .aside-left,
 .aside-right,
@@ -65,6 +71,14 @@ article.page {
     -webkit-transform: translateX(-@aside-right-width);
             transform: translateX(-@aside-right-width);
   }
+}
+
+.blog-aside {
+  display: block;
+  float: right;
+  min-height: 100vh;
+  height: 100%;
+  background: @gray-lighter;
 }
 
 .aside-left {

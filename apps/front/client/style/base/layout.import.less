@@ -9,7 +9,8 @@ body {
 #wrapper {
   position: relative;
   overflow-x: hidden;
-  height: 100vh;
+  min-height: 100%;
+  height: 100vh !important;
   background: @light-lightest;
 }
 
@@ -17,7 +18,7 @@ body {
   position: relative;
   background: @light-lightest;
   width: 100vw;
-  height: 100vh;
+  min-height: 100%;
   -webkit-transition: 0.3s ease all;
           transition: 0.3s ease all;
   -webkit-transform: translateX(0);
@@ -32,7 +33,12 @@ body {
   }
 }
 
+#inner-wrapper {
+  min-height: 100vh;
+  height: 100%;
 
+
+}
 
 .aside-left,
 .aside-right,
@@ -47,6 +53,7 @@ article.page {
   top: 0;
   right: -@aside-right-width;
   padding: 5px 5px;
+  //min-height: 100vh;
   min-height: 100%;
   width: @aside-right-width;
   border-left: 1px solid @navbar-default-border;
@@ -65,7 +72,8 @@ article.page {
   top: 0;
   left: -@aside-left-width;
   padding: 5px 5px;
-  min-height: 100vh;
+  //min-height: 100vh;
+  min-height: 100%;
   width: @aside-left-width;
   border-right: 1px solid @navbar-default-border;
   background-color: @body-bg;

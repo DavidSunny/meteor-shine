@@ -21,6 +21,7 @@ HomeController = RouteController.extend({
 
   subscriptions: function() {
     this.subs = Meteor.subscribe('blogsList', this.findQuery(), this.findOptions());
+    this.subs = Meteor.subscribe('authorProfile');
   },
 
   data: function() {

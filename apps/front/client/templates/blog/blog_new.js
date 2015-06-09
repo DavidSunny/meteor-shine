@@ -61,8 +61,8 @@ Template.blogNew.events({
     // get inputs
     var object = {
       title: $(e.target).find('[name=title]').html(),
-      content: finalContent
-      //content: $(e.target).find('[name=content]').html()
+      // content: finalContent
+      content: $(e.target).find('[name=content]').html()
     };
 
     // validate inputs

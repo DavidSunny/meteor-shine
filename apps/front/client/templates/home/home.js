@@ -33,16 +33,3 @@ Template.homeListItem.helpers({
   }
 });
 
-/*
-Template.home.events({
-  'change input[name=theme]': function(e) {
-    e.preventDefault();
-
-    var theme = $(e.target).val();
-    $('body').attr('class', '');
-    if (theme !== 'none') {
-      $('body').addClass(theme);
-    }
-  }
-});
-*/

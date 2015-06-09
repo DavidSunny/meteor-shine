@@ -7,7 +7,6 @@ Meteor.publish('blogsList', function(query, options) {
   return blogs;
 });
 
-
 Meteor.publish('blogOne', function(blogId) {
   var blogs = Blogs.find({ _id: blogId });
 

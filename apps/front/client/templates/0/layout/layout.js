@@ -1,28 +1,30 @@
 Template.layout.events({
-	'click #main-overlay': function () {
-    console.log('Hello!');
-    $('#container').removeClass('aside-left-set')
-  },
-  'click article.page': function () {
-    // Close aside-right when page content is clicked
-    // Comment this section out to disable this feature
-    var wrapper = $('#wrapper');
-    if (wrapper.hasClass('aside-right-set')) {
-      wrapper.removeClass('aside-right-set');
-    } else {
-
-    }
-  },
-  'click .aside-right li': function () {
-    // Close aside-right when notification li is clicked
-    // Comment this section out to disable this feature
-    var wrapper = $('#wrapper');
-    if (wrapper.hasClass('aside-right-set')) {
-      wrapper.removeClass('aside-right-set');
-    } else {
-
-    }
+  'click ul.aside-tree li a': function () {
+    $('#wrapper').removeClass('aside-left-set');
   }
+  // 'click #inner-wrapper': function () {
+  //   $()
+  // },
+  // 'click article.page': function () {
+  //   // Close aside-right when page content is clicked
+  //   // Comment this section out to disable this feature
+  //   var wrapper = $('#wrapper');
+  //   if (wrapper.hasClass('aside-right-set')) {
+  //     wrapper.removeClass('aside-right-set');
+  //   } else {
+
+  //   }
+  // },
+  // 'click .aside-right li': function () {
+  //   // Close aside-right when notification li is clicked
+  //   // Comment this section out to disable this feature
+  //   var wrapper = $('#wrapper');
+  //   if (wrapper.hasClass('aside-right-set')) {
+  //     wrapper.removeClass('aside-right-set');
+  //   } else {
+
+  //   }
+  // }
 });
 
 Template.layout.onRendered( function () {

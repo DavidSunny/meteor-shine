@@ -40,9 +40,10 @@
             <i class="fa fa-chevron-down"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-right ">
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
+            <li><a href="{{pathFor 'blogNew'}}">New Blog</a></li>
+            <li><a href="{{pathFor 'myBlogsList'}}">My Blogs</a></li>
+            <li><a href="{{pathFor 'profileView'}}">Account Settings</a></li>
+            <li><a href="" data-action="signOut">Sign Out</a></li>
           </ul>
         </li>
         {{else}}

@@ -4,7 +4,7 @@
  */
 
 @light-base       : #FFF;
-@light-font-base  : darken(@light-base, 40%);
+@light-font-base  : rgba(0, 0, 0, 0.8);
 @navbar-height    : 65px;
 @avatar-header    : 36px;
 
@@ -46,15 +46,13 @@
 }
 
 a.navbar-brand {
-  //position: absolute;
   display: block;
-  left: 50%;
   padding-right: 0;
   padding-left: 0;
   width: auto;
   text-align: center;
   .bold;
-  .translate(-50%, 0);
+  //.translate(-50%, 0);
 }
 
 .avatar-header {

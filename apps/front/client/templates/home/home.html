@@ -15,8 +15,8 @@
     {{_ 'text_no_blogs'}} <!-- When no blog posts -->
   {{else}}
     <div class="container">
-      <div class="row">
-        <div class="col-md-9">
+      <div class="row-fluid">
+        <div class="col-single">
           <div class="row-fluid">
             {{#each blogs}}
               {{> homeListItem}}
@@ -32,10 +32,10 @@
             {{/if}}
           </div>
         </div>
-        <div class="col-md-3">
-          <!-- Space for Right -->
+        <!-- <div class="col-aside">
+          Space for Right
           Something here
-        </div>
+        </div> -->
       </div>
     </div>
   {{/if}}

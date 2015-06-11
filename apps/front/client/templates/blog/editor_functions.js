@@ -1,29 +1,33 @@
+/**
+ * inlineEditor
+ * (Medium Clone)
+ * created by Sang Yoo Kim (sangyoo.km@gmail.com)
+ */
+
 inlineEditor = {
   init : function (editor, title, toolbar) {
-    var editor = editor;
-    var title  = title;
-    var toolbar = toolbar;
-    var self   = this;
+    self    = this;
+
+    editor  = editor;
+    title   = title;
+    toolbar = toolbar;
+
     console.log('Inline Editor Initiated');
 
     // Editor Events
-    editor.addEventListener('keyup', self.events.keyup);
-    editor.addEventListener('keydown', self.events.keydown);
-    editor.addEventListener('click', self.events.click);
+    editor.addEventListener('keyup', function () {
+      self.events.keyup(editor, toolbar);
+    });
+    editor.addEventListener('keydown', function () {
+      self.events.keydown;
+    });
+    editor.addEventListener('click', function () {
+      self.events.click;
+    });
     editor.addEventListener('mouseup', function (event) {
       self.events.mouseup(editor, toolbar);
     });
-    document.addEventListener('mousedown', function (event) {
-      setTimeout( function () {
-        if ((! $(editor).is(':focus')) && (! $(event.target).is('#editor-toolbar *'))) {
-          // console.log('docuemtn editor !focus');
-          // console.log(event.target);
-          $(toolbar).css('top', -999);
-          $(toolbar).css('left', -999);
-          $(toolbar).removeClass('active');
-        }
-      }, 1);
-    });
+
     // Title Events
     title.addEventListener('keydown', self.events.titleKeydown);
 
@@ -38,43 +42,43 @@ inlineEditor = {
     // Editor Placeholders
     editor.addEventListener('blur', self.events.editorBlur, true);
     editor.addEventListener('focus', self.events.editorFocus, true);
+
+    // Toolbar
+    // Editor Toolbar Buttons (a#editor-x)
+    toolbar.addEventListener('click', function (event) {
+      self.toolbarEvents(toolbar);
+    });
+
+    $(window).on('resize', function () {
+      var selection = window.getSelection();  // Get selected Text
+      if (selection.isCollapsed === false) {
+        console.log('collapse false');
+        console.log(toolbar);
+        var range = selection.getRangeAt(0);    // Get range from selected text
+        var boundary = range.getBoundingClientRect(); // Get Boundary of range
+        $(toolbar).css('top', boundary.top - 5 + window.pageYOffset + "px");
+        $(toolbar).css('left', (boundary.left + boundary.right)/2 + "px");
+      }
+    });
+
+    // Editor mousedown to Turn off Highlight Toolbar
+    document.addEventListener('mousedown', function (event) {
+      setTimeout( function () {
+        if ((! $(editor).is(':focus')) && (! $(event.target).is('#editor-toolbar *'))) {
+          // console.log('docuemtn editor !focus');
+          // console.log(event.target);
+          self.toolbarHide(toolbar);
+        }
+      }, 1);
+      $('p').addClass('shine-p');
+    });
   },
 
-  editorToolbar: function (editor ,toolbar) {
 
-    var selection = window.getSelection();  // Get selected Text
-
-    var editorToolbar = toolbar;
-
-    // If caret is collapsed (nothing is selected)
-    if(selection.isCollapsed === true){
-      console.log('collapse true');
-      // Close Toolbar
-      $(editorToolbar).css('top', -999);
-      $(editorToolbar).css('left', -999);
-      $(editorToolbar).removeClass('active');
-    }
-    // If caret is not collapsed (something is selected)
-    if(selection.isCollapsed === false && $(editor).is(':focus')){
-      // if( $.trim(selection.toString()).length > 0 ) {
-        //if( $(editor).is(':focus') ){
-          console.log('collapse false');
-          var range = selection.getRangeAt(0);    // Get range from selected text
-          var boundary = range.getBoundingClientRect(); // Get Boundary of range
-
-          $(editorToolbar).css('top', boundary.top - 5 + window.pageYOffset + "px");
-          $(editorToolbar).css('left', (boundary.left + boundary.right)/2 + "px");
-          $(editorToolbar).addClass('active');
-        //}
-      // }
-    }
-
-
-  },
 
   events : {
-    keyup : function (event) {
-      var editor       = this;
+    keyup : function (editor, toolbar) {
+      //var editor       = this;
       var keycode      = event.keyCode || event.which;
       var focusNode    = window.getSelection().focusNode;
       var selectedNode = $.trim($(focusNode).text()).length;
@@ -107,6 +111,10 @@ inlineEditor = {
           $(focusNode.parentNode).addClass('is-selected');
         }
       }
+
+      inlineEditor.editorToolbar(editor, toolbar);
+
+      $('p').addClass('shine-p');
     },
 
     keydown: function (event) {
@@ -137,6 +145,7 @@ inlineEditor = {
       setTimeout( function () {
         inlineEditor.editorToolbar(editor, toolbar);
       }, 1);
+      $('p').addClass('shine-p');
     },
 
     titleKeydown: function (event) {
@@ -210,5 +219,81 @@ inlineEditor = {
 
       // }
     },
-  }
+  }, // End Events
+
+  toolbarEvents: function () {
+    tryTarget = function (button) {
+      // Added @tryTarget because `event.target` could be either
+      // the anchor tag itself, or the icon inside the anchor
+      var target = $(event.target);
+      if (target.parent().is(button)) {
+        return true;
+      } else if (target.is(button)) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    var targetEl = window.getSelection().focusNode.parentNode;
+
+    if (tryTarget($('#editor-bold'))) {
+      document.execCommand('bold', false, true);
+    }
+    if (tryTarget($('#editor-italic'))) {
+      document.execCommand('italic', false, true);
+    }
+    if (tryTarget($('#editor-heading'))) {
+      console.log(window.getSelection().focusNode.parentNode.nodeName)
+      if (window.getSelection().focusNode.parentNode.nodeName === 'H3') {
+        document.execCommand('formatBlock', false, 'p');
+        $('p').addClass('shine-p');
+      } else {
+        document.execCommand('formatBlock', false, '<h3>');
+        $('h3').addClass('shine-h3');
+      }
+    }
+    if (tryTarget($('#editor-center'))) {
+      //document.execCommand('justifyCenter', false, true);
+      console.log(targetEl);
+      if( $(targetEl).css('text-align') === 'center' ) {
+        document.execCommand('justifyLeft', false, true);
+      } else {
+        document.execCommand('justifyCenter', false, true);
+      }
+    }
+  },
+
+  editorToolbar: function (editor ,toolbar) {
+
+    var selection = window.getSelection();  // Get selected Text
+
+    var editorToolbar = toolbar;
+
+    // If caret is collapsed (nothing is selected)
+    if (selection.isCollapsed === true) {
+      console.log('collapse true');
+      // Close Toolbar
+      $(editorToolbar).css('top', -999);
+      $(editorToolbar).css('left', -999);
+      $(editorToolbar).removeClass('active');
+    }
+    // If caret is not collapsed (something is selected)
+    if (selection.isCollapsed === false && $(editor).is(':focus')) {
+      console.log('collapse false');
+      var range = selection.getRangeAt(0);    // Get range from selected text
+      var boundary = range.getBoundingClientRect(); // Get Boundary of range
+
+      $(editorToolbar).css('top', boundary.top - 5 + window.pageYOffset + "px");
+      $(editorToolbar).css('left', (boundary.left + boundary.right)/2 + "px");
+      $(editorToolbar).addClass('active');
+    }
+  },
+
+  toolbarHide : function (toolbar) {
+    $(toolbar).css('top', -999);
+    $(toolbar).css('left', -999);
+    $(toolbar).removeClass('active');
+  },
+
 };

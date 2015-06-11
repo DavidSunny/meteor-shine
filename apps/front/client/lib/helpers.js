@@ -23,3 +23,12 @@ Template.registerHelper('getAvatarUrl', function () {
     return user.profile.avatarUrl
   }
 })
+
+Template.registerHelper('getAvatarAuthor', function () {
+  var authorId = this.user._id;
+  var author = Meteor.users.findOne({_id: authorId});
+
+  if (author && author.profile) {
+    return author.profile.avatarUrl
+  }
+});

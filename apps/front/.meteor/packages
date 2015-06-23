@@ -33,3 +33,5 @@ ground:db
 reactive-var
 
 reywood:publish-composite
+react
+react-template-helper

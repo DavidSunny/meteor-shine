@@ -14,6 +14,49 @@ cloudinary.config({
 var cloudinary_cors = Meteor.absoluteUrl('upload/cloudinary_cors.html');
 
 Meteor.methods({
+  deleteAllByTag: function(tagName) {
+
+    // Cloudinary image delete Node.js API
+    // http://cloudinary.com/documentation/admin_api#delete_resources
+    // 하루 API call 500회 제한
+    //
+    // ### by tag
+    //
+    // cloudinary.api.delete_resources_by_tag(tagName,
+    //   function(result){
+    //     console.log('deleteAllByTag result : ', result);
+    //   });
+
+    // ### by transformations
+    // var options = {
+    //   "max_results": 500
+    // };
+    // cloudinary.api.transformations(function(result){
+    //   // console.log(result)
+
+    //   // console.log('result.length : ', result.transformations.length);
+    //   var length = result.transformations.length;
+
+    //   for (var i= 0; i < length; i++) {
+    //     var name = result.transformations[i].name;
+    //     cloudinary.api.delete_transformation(name,
+    //         function(result) { console.log(result) });
+    //   }
+
+    // }, options);
+    //
+
+    // ### by prefix
+    // cloudinary.api.delete_resources_by_prefix('upload', function(result){
+    //   console.log(result);
+    // });
+
+    // ### 모든 자원 지우기
+    // cloudinary.api.delete_all_resources(function(result){}, { all: true });
+
+
+
+  },
   cloudinaryUploadTag: function(elementId, options) {
     options = _.extend(options, { callback: cloudinary_cors });
     return cloudinary.uploader.image_upload_tag(elementId, options);
@@ -79,6 +122,7 @@ CloudinaryServer = {
 
     return future.wait();
   },
+
   updateProfileImages: function(profileObj) {
     // API : cloudinary.url(public_id, options);
     // return : image url

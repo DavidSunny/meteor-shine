@@ -18,10 +18,24 @@ Template.profileView.helpers({
 
 });
 Template.profileView.events({
+  "click #deleteByTag": function() {
+    // alert('test');
 
-  "click #editPicture, click .avatar-wrapper-custom img, click .avatar-initials": function(e) {
+    var tagName ='blogs';
+    // var tagName ='accounts';
+    Meteor.call('deleteAllByTag', tagName, function(error, result) {
+      if (error) console.log('error : ', error);
+
+      console.log('delete result : ', result);
+    });
+  },
+
+  "click #editPicture, click .view-avatar img, click .avatar-initials": function(e) {
     e.preventDefault();
-    $('#profileModal').modal('show');
+    $('#avatarModal').modal('show');
+    //var cropInstance = new CropAvatar();
+    //cropInstance.init();
+    //cropInstance.click();
   },
 
   'click #editProfile': function() {

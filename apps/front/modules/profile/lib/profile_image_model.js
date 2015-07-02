@@ -37,6 +37,11 @@ var prepareData = function (attributes) {
 };
 
 Meteor.methods({
+  // "deleteByTagName" : function() {
+  //   var tagName = 'accounts';
+  //   var result = CloudinaryServer.deleteAllByTag(tagName);
+  //   return result;
+  // },
   "profileImagesInsert": function (attributes) {
     check(attributes, Match.Any);
 

@@ -1,4 +1,4 @@
-# Meteor Shine
+# Shine Custome
 
 Open Source Meteor CMS Project
 
